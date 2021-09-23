@@ -1,0 +1,111 @@
+# This file contains common pin mappings for the BIGTREETECH SKR mini
+# E3 v2.0. To use this config, the firmware should be compiled for the
+# STM32F103 with a "28KiB bootloader" and USB communication. Also,
+# select "Enable extra low-level configuration options" and configure
+# "GPIO pins to set at micro-controller startup" to "!PA14".
+
+# The "make flash" command does not work on the SKR mini E3. Instead,
+# after running "make", copy the generated "out/klipper.bin" file to a
+# file named "firmware.bin" on an SD card and then restart the SKR
+# mini E3 with that SD card.
+
+# See docs/Config_Reference.md for a description of parameters.
+
+[include mcu/*.cfg]
+[include bltouch/*.cfg]
+
+[bltouch]
+x_offset: -44.6
+#   The distance (in mm) between the probe and the nozzle along the
+#   x-axis. The default is 0.
+
+y_offset: -7.2
+#   The distance (in mm) between the probe and the nozzle along the
+#   y-axis. The default is 0.
+
+[printer]
+kinematics: cartesian
+max_velocity: 300
+max_accel: 3000
+max_z_velocity: 75
+max_z_accel: 100
+
+[heater_bed]
+heater_pin: PC9
+sensor_type: ATC Semitec 104GT-2
+sensor_pin: PC3
+control: pid
+pid_Kp: 70.401
+pid_Ki: 1.219
+pid_Kd: 1016.416
+min_temp: 0
+max_temp: 130
+
+[extruder]
+step_pin: PB3
+dir_pin: !PB4
+enable_pin: !PD2
+heater_pin: PC8
+sensor_type: EPCOS 100K B57560G104F
+sensor_pin: PA0
+microsteps: 16
+rotation_distance: 23.075
+nozzle_diameter: 0.400
+filament_diameter: 1.750
+control: pid
+pid_Kp: 21.527
+pid_Ki: 1.063
+pid_Kd: 108.982
+min_temp: 0
+max_temp: 250
+min_extrude_temp: 0
+
+[tmc2209 extruder]
+uart_pin: PC11
+tx_pin: PC10
+uart_address: 3
+run_current: 0.650
+hold_current: 0.500
+stealthchop_threshold: 999999
+
+#*# <---------------------- SAVE_CONFIG ---------------------->
+#*# DO NOT EDIT THIS BLOCK OR BELOW. The contents are auto-generated.
+#*#
+#*# [bed_mesh default]
+#*# version = 1
+#*# points =
+#*# 	  -0.060000, -0.145000, -0.206667, -0.295000, -0.450833
+#*# 	  0.139167, 0.088333, -0.009167, -0.097500, -0.304167
+#*# 	  0.285000, 0.211667, 0.129167, 0.031667, -0.165000
+#*# 	  0.396667, 0.316667, 0.243333, 0.140833, -0.061667
+#*# 	  0.485833, 0.393333, 0.324167, 0.248333, 0.074167
+#*# tension = 0.2
+#*# min_x = 10.0
+#*# algo = bicubic
+#*# y_count = 5
+#*# mesh_y_pps = 2
+#*# min_y = 10.0
+#*# x_count = 5
+#*# max_y = 220.0
+#*# mesh_x_pps = 2
+#*# max_x = 200.0
+#*#
+#*# [bed_mesh steel_pei]
+#*# version = 1
+#*# points =
+#*# 	0.143333, -0.010000, -0.230000
+#*# 	0.422500, 0.267500, -0.005000
+#*# 	0.635833, 0.485000, 0.251667
+#*# tension = 0.2
+#*# min_x = 10.0
+#*# algo = bicubic
+#*# y_count = 3
+#*# mesh_y_pps = 2
+#*# min_y = 10.0
+#*# x_count = 3
+#*# max_y = 220.0
+#*# mesh_x_pps = 2
+#*# max_x = 200.0
+#*#
+#*# [bltouch]
+#*# z_offset = 1.308
